@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://cow40twvddjud"]
+
+[ext_resource type="Material" uid="uid://crp5r68vyy17q" path="res://Materials/dirt.tres" id="1_t1gg8"]
+[ext_resource type="PackedScene" uid="uid://d03gp6nlcfrc" path="res://Scenes/Player/player.tscn" id="2_yp2ti"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t1gg8"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_yp2ti"]
+sky_material = SubResource("ProceduralSkyMaterial_t1gg8")
+
+[sub_resource type="Environment" id="Environment_3rhlx"]
+background_mode = 2
+sky = SubResource("Sky_yp2ti")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2bkl"]
+albedo_color = Color(8.27849e-06, 0.743192, 0.129681, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3rhlx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_e2bkl")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, 1.63282, 0)
+size = Vector3(2, 2, 2)
+material = ExtResource("1_t1gg8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, 3.63282, 0)
+size = Vector3(2, 2, 2)
+material = ExtResource("1_t1gg8")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, 3.63282, 0.02)
+size = Vector3(2, 2, 2)
+material = ExtResource("1_t1gg8")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, 3.63282, 0.04)
+size = Vector3(2, 2, 2)
+material = ExtResource("1_t1gg8")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, 3.63282, 0.06)
+size = Vector3(2, 2, 2)
+material = ExtResource("1_t1gg8")
+
+[node name="Player" parent="." instance=ExtResource("2_yp2ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.93899, 0)
