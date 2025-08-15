@@ -17,7 +17,6 @@
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("1_mn1vk")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5oi0o"]
@@ -68,7 +67,6 @@ image = SubResource("Image_mn1vk")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("3_eg8hm")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yarg7"]
@@ -119,7 +117,6 @@ image = SubResource("Image_b08gv")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("4_i3bhx")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xw0hm"]
@@ -170,7 +167,6 @@ image = SubResource("Image_eg8hm")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("5_b4wa5")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ouih8"]
@@ -221,7 +217,6 @@ image = SubResource("Image_i3bhx")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("6_7ninr")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3yhys"]
@@ -272,7 +267,6 @@ image = SubResource("Image_b4wa5")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("7_t6xvc")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ye1ws"]
@@ -323,7 +317,6 @@ image = SubResource("Image_7ninr")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("8_wxaqd")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pjplu"]
@@ -374,7 +367,6 @@ image = SubResource("Image_t6xvc")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("9_qgvvg")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u8gwm"]
@@ -425,7 +417,6 @@ image = SubResource("Image_wxaqd")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("10_51k16")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_plvo6"]
@@ -476,7 +467,6 @@ image = SubResource("Image_qgvvg")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("11_s4yi1")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_arnvs"]
@@ -527,7 +517,6 @@ image = SubResource("Image_51k16")
 resource_name = "Blocks_Pixelart"
 cull_mode = 2
 albedo_texture = ExtResource("12_rqjv7")
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8wlo6"]

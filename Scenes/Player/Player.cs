@@ -9,6 +9,7 @@ public partial class Player : CharacterBody3D
 	private const double _MouseSensitivity = 0.002;
 
 	[Export] private Camera3D _PlayerCamera;
+	[Export] private RayCast3D _PlayerCameraRayCast; // this raycast will allow us to destroy an place blocks, using the ray that it casts to check whether we are looking a block or not.
 
 	public override void _Ready()
 	{
@@ -73,6 +74,20 @@ public partial class Player : CharacterBody3D
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, _PlayerSpeed); // this function allows us to change a value (first parameter) to another value (second parameter), but we can choose at waht pace we want that to happen (third parameter). for the third parameter, whatever we put there will be substracted from the value every frame, until we get to our desired value.
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _PlayerSpeed); // in this case, this allows us to do an "smooth" effect in the movement of the player.
+		}
+
+		// handle mouse clicks
+		if (Input.IsActionJustPressed("destroy"))
+		{
+			if (_PlayerCameraRayCast.IsColliding())  // we check if the raycast is colliding with something
+			{
+				if (_PlayerCameraRayCast.GetCollider().HasMethod("destroy_block")) // if the last condition is true, then we will get the collider, and adding to that, we will see if the collider (which is an object) has a method called "destroy_block", which only the grid map will have, as we are going to add it in the gridmap script. then now we now we can destroy a block in the grid map.
+				{
+					// in the following line of code we erase/destroy the block that exists in the gridmap.
+					_PlayerCameraRayCast.GetCollider().Call("destroy_block", _PlayerCameraRayCast.GetCollisionPoint() - _PlayerCameraRayCast.GetCollisionNormal());
+					// first of all, we get the collider, which in this case we know is the grid map, to then call the function "destroy_block", giving the function the parameters that are the collision point, and substracting the GetCollisionNormal(), which is a function that allows us break blocks properly (see minecraft godot video for reference or search it)
+				}
+			}
 		}
 
 		Velocity = velocity;
