@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cow40twvddjud"]
+[gd_scene load_steps=8 format=3 uid="uid://cow40twvddjud"]
 
+[ext_resource type="Script" uid="uid://b5l15j6l8x1cl" path="res://Scenes/World/World.cs" id="1_3rhlx"]
 [ext_resource type="Material" uid="uid://crp5r68vyy17q" path="res://Materials/dirt.tres" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://d03gp6nlcfrc" path="res://Scenes/Player/player.tscn" id="2_yp2ti"]
 
@@ -20,6 +21,7 @@ glow_enabled = true
 albedo_color = Color(8.27849e-06, 0.743192, 0.129681, 1)
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_3rhlx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3rhlx")
