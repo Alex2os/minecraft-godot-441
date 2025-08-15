@@ -3,9 +3,10 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-	public const float Speed = 8.0f;
-	public const float JumpVelocity = 8.0f;
-	private double sensitivity = 0.002;
+	private const float _PlayerSpeed = 8.0f;
+	private const float _PlayerJumpVelocity = 12.0f;
+	private const float _Gravity = -24.0f;
+	private const double _MouseSensitivity = 0.002;
 
 	[Export] private Camera3D _PlayerCamera;
 
@@ -20,7 +21,7 @@ public partial class Player : CharacterBody3D
 		{
 			Vector3 temp_player = Rotation; // get the rotation of the player
 			Vector3 temp_camera = _PlayerCamera.Rotation;
-			temp_player.Y = temp_player.Y - mouse_event.Relative.X * (float)sensitivity;
+			temp_player.Y = temp_player.Y - mouse_event.Relative.X * (float)_MouseSensitivity;
 			// the line above functions as this follows: mouse_event.Relative.X returns a value in pixels of how far the mouse has moved since the last frame.
 			// if in the editor we want to rotate the player and move it to the right, we will see that it will be negative when we move it to the right. this is what we want to do here.
 			// so, in this case, if we move to the right, we will get a distance of, let's say, 5, and then that will be the value of mouse_event.Relative.X, so then when we substract it from the temp.Y, we will get a rotation to the right.
@@ -30,7 +31,8 @@ public partial class Player : CharacterBody3D
 			// we can do the same for moving the camera upwards and downwards, but we have to do this in the camera, as there can be bugs if we do it with the player instead.
 
 
-			temp_camera.X = temp_camera.X - mouse_event.Relative.Y * (float)sensitivity;
+			temp_camera.X = temp_camera.X - mouse_event.Relative.Y * (float)_MouseSensitivity;
+			temp_camera.X = Mathf.Clamp(temp_camera.X, Mathf.DegToRad(-70), Mathf.DegToRad(80)); // this clamp function allows us to keep a value between two given values. first parameter is the value we want between the two values, and then goes minimun and maximum values. in this case, we use degrees and radians, but is up to what we need, and in this case we need this for the camera for not to rotate around the player.
 
 			_PlayerCamera.Rotation = temp_camera;
 			Rotation = temp_player; // here, at last, we just assign the value here so we have the final result: a moving camera on the X axis, even when it's the Y that we are modyfing.
@@ -46,13 +48,13 @@ public partial class Player : CharacterBody3D
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			velocity += GetGravity() * (float)delta; // in this case, the function GetGravity() returns 9.81 as gravity value, which is the usual gravity value. also, this function returns a vector3
+			velocity += new Vector3(0, _Gravity, 0) * (float)delta; // in this case, the function GetGravity() returns 9.81 as gravity value, which is the usual gravity value. also, this function returns a vector3
 		}
 
 		// Handle Jump.
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
-			velocity.Y = JumpVelocity;
+			velocity.Y = _PlayerJumpVelocity;
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -64,13 +66,13 @@ public partial class Player : CharacterBody3D
 																									 // finally, the .Normalized() is used so all the directions of the vector have the same magnitude, even if we move diagonally (which, in some games, happens that we move faster diagonally than just going forwards.)
 		if (direction != Vector3.Zero) // vector3.zero represents a vector3 that contains just zeros. this if checks if all is zeros, and if it's not follows the logic:
 		{
-			velocity.X = direction.X * Speed; // in this case, if direction.X is a zero that was gotten from the Input.GetVector, multiplying it by speed will not affect the movement. same applies for direction.Z
-			velocity.Z = direction.Z * Speed; // in the case there's actually a one as value, then the speed will be applied.
+			velocity.X = direction.X * _PlayerSpeed; // in this case, if direction.X is a zero that was gotten from the Input.GetVector, multiplying it by speed will not affect the movement. same applies for direction.Z
+			velocity.Z = direction.Z * _PlayerSpeed; // in the case there's actually a one as value, then the speed will be applied.
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed); // this function allows us to change a value (first parameter) to another value (second parameter), but we can choose at waht pace we want that to happen (third parameter). for the third parameter, whatever we put there will be substracted from the value every frame, until we get to our desired value.
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed); // in this case, this allows us to do an "smooth" effect in the movement of the player.
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, _PlayerSpeed); // this function allows us to change a value (first parameter) to another value (second parameter), but we can choose at waht pace we want that to happen (third parameter). for the third parameter, whatever we put there will be substracted from the value every frame, until we get to our desired value.
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _PlayerSpeed); // in this case, this allows us to do an "smooth" effect in the movement of the player.
 		}
 
 		Velocity = velocity;
