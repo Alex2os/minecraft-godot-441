@@ -77,6 +77,8 @@ public partial class Player : CharacterBody3D
 		}
 
 		// handle mouse clicks
+
+		// left click
 		if (Input.IsActionJustPressed("destroy"))
 		{
 			if (_PlayerCameraRayCast.IsColliding())  // we check if the raycast is colliding with something
@@ -89,6 +91,22 @@ public partial class Player : CharacterBody3D
 				}
 			}
 		}
+
+		// right click
+		if (Input.IsActionJustPressed("build"))
+		{
+			if (_PlayerCameraRayCast.IsColliding())  
+			{
+				if (_PlayerCameraRayCast.GetCollider().HasMethod("place_block")) // instead of searching for the "destroy_block" function, now we seek for the place_block function.
+				{
+					
+					_PlayerCameraRayCast.GetCollider().Call("place_block", _PlayerCameraRayCast.GetCollisionPoint() + _PlayerCameraRayCast.GetCollisionNormal(), 2); // here we pass the index of the block too. check if later it's done an inventory to choose what block to put.
+					// now, instead of removing the normal from the colision point, now we add it, since we want to place the block in the empty space, not in the space where there's actually a block already. 
+				}
+			}
+		}
+
+
 
 		Velocity = velocity;
 		MoveAndSlide(); // move and slide, as seen on other projects, allows us to reproduce all the velocity and gravity we have been applying in this code.
