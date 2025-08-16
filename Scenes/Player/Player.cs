@@ -33,7 +33,7 @@ public partial class Player : CharacterBody3D
 
 
 			temp_camera.X = temp_camera.X - mouse_event.Relative.Y * (float)_MouseSensitivity;
-			temp_camera.X = Mathf.Clamp(temp_camera.X, Mathf.DegToRad(-70), Mathf.DegToRad(80)); // this clamp function allows us to keep a value between two given values. first parameter is the value we want between the two values, and then goes minimun and maximum values. in this case, we use degrees and radians, but is up to what we need, and in this case we need this for the camera for not to rotate around the player.
+			temp_camera.X = Mathf.Clamp(temp_camera.X, Mathf.DegToRad(-90), Mathf.DegToRad(90)); // this clamp function allows us to keep a value between two given values. first parameter is the value we want between the two values, and then goes minimun and maximum values. in this case, we use degrees and radians, but is up to what we need, and in this case we need this for the camera for not to rotate around the player.
 
 			_PlayerCamera.Rotation = temp_camera;
 			Rotation = temp_player; // here, at last, we just assign the value here so we have the final result: a moving camera on the X axis, even when it's the Y that we are modyfing.
@@ -53,7 +53,7 @@ public partial class Player : CharacterBody3D
 		}
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
+		if (Input.IsActionPressed("jump") && IsOnFloor())
 		{
 			velocity.Y = _PlayerJumpVelocity;
 		}
@@ -100,7 +100,7 @@ public partial class Player : CharacterBody3D
 				if (_PlayerCameraRayCast.GetCollider().HasMethod("place_block")) // instead of searching for the "destroy_block" function, now we seek for the place_block function.
 				{
 					
-					_PlayerCameraRayCast.GetCollider().Call("place_block", _PlayerCameraRayCast.GetCollisionPoint() + _PlayerCameraRayCast.GetCollisionNormal(), 2); // here we pass the index of the block too. check if later it's done an inventory to choose what block to put.
+					_PlayerCameraRayCast.GetCollider().Call("place_block", _PlayerCameraRayCast.GetCollisionPoint() + _PlayerCameraRayCast.GetCollisionNormal(), 0); // here we pass the index of the block too. check if later it's done an inventory to choose what block to put.
 					// now, instead of removing the normal from the colision point, now we add it, since we want to place the block in the empty space, not in the space where there's actually a block already. 
 				}
 			}
